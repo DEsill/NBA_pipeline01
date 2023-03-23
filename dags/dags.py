@@ -67,7 +67,7 @@ def load_data_to_s3():
     s3.upload_file("/home/airflow/data/teams_cold.csv", "sill-databricks-projects", "teams_cold.csv")
 
 with DAG(
-    dag_id = 'nba_stats_pipline',
+    dag_id = 'nba_stats_pipeline',
     start_date = days_ago(1),
     schedule_interval = '@once'
 ) as dag:

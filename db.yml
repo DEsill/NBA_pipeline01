@@ -1,0 +1,16 @@
+version: "3"
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    expose:
+      - "5432"
+    ports:
+      - "5435:5432"
+    volumes:
+      - ./create_table.sql:/docker-entrypoint-initdb.d/create_table.sql
+      - ./data:/var/lib/postgresql/csv
+      #- ./postgres_tables:/var/lib/postgresql/external_csv

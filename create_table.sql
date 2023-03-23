@@ -1,0 +1,83 @@
+DROP TABLE IF EXISTS mvps;
+
+CREATE TABLE mvps (
+	ID SERIAL,
+	Rank CHAR(10),
+	Player VARCHAR(255),
+	Age DECIMAL,
+	Tm CHAR(3),
+	First DECIMAL,
+	Pts_Won DECIMAL,
+	Pts_Max DECIMAL,
+	Share DECIMAL,
+	G DECIMAL,	
+	MP DECIMAL,
+	PTS DECIMAL,	
+	TRB DECIMAL,	
+	AST DECIMAL,	
+	STL DECIMAL,	
+	BLK DECIMAL,	
+	FG_per DECIMAL,	
+	ThreePts_per DECIMAL,	
+	FT_per DECIMAL,	 
+	WS DECIMAL,	
+	WS_48 DECIMAL,	
+	Year INTEGER
+);
+
+\COPY mvps FROM '/var/lib/postgresql/csv/mvps_hot.csv' WITH (FORMAT CSV, HEADER true);
+
+DROP TABLE IF EXISTS teams;
+
+CREATE TABLE teams (
+	ID SERIAL,
+	W DECIMAL,
+	L DECIMAL,
+	WL_per DECIMAL,
+	GB DECIMAL,
+	PS_PER_GAME DECIMAL,
+	PA_PER_GAME DECIMAL,
+	SRS DECIMAL,
+	Year INTEGER,
+	Team VARCHAR(255)
+);
+
+\COPY teams FROM 'var/lib/postgresql/csv/teams_cold.csv' WITH (FORMAT CSV, HEADER true);
+
+DROP TABLE IF EXISTS players;
+
+CREATE TABLE players (
+	ID SERIAL,
+	Player VARCHAR(255),
+	Pos CHAR(15),
+	Age INTEGER,
+	Tm CHAR(3),
+	G INTEGER,
+	GS INTEGER,
+	MP DECIMAL,
+	FG DECIMAL,
+	FGA DECIMAL,
+	FG_per DECIMAL,
+	ThreeP DECIMAL,
+	ThreePA DECIMAL,
+	ThreeP_per DECIMAL,
+	TwoP DECIMAL,
+	TwoPA DECIMAL,
+	TwoP_per DECIMAL,
+	eFG_per DECIMAL,
+	FT DECIMAL,
+	FTA DECIMAL,
+	FT_per DECIMAL,
+	ORB DECIMAL,
+	DRB DECIMAL,
+	TRB DECIMAL,
+	AST DECIMAL,
+	STL DECIMAL,
+	BLK DECIMAL,
+	TOV DECIMAL,
+	PF DECIMAL,
+	PTS DECIMAL,
+	Year INTEGER
+);
+
+\COPY players FROM 'var/lib/postgresql/csv/players_cold.csv' WITH (FORMAT CSV, HEADER true);
